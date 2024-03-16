@@ -255,11 +255,36 @@ section h2 span {
 
 .discover-link img {
   width: 15px;
-  object-fit: cover;
 }
 
 .discover-main-img {
   width: 50%;
+  object-fit: cover;
+}
+
+/* Animations */
+h2,
+.section-subtitle,
+.text-discover-content > *,
+.discover-main-image {
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity 0.5s 0.3s ease-out, transform 0.5s 0.3s ease-out;
+}
+
+h2.active,
+.section-subtitle.active,
+.text-discover-content > *.active,
+.discover-main-image.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1100px) {
+  main.container {
+    border-right: 0;
+    border-left: 0;
+  }
 }
 
 @media (max-width: 800px) {
@@ -313,13 +338,13 @@ section h2 span {
 
 /* Animation */
 .side-apparition-container {
-  /* transform: translateX(30px) skew(20deg); */
-  /* opacity: 0; */
+  transform: translateX(30px) skew(20deg);
+  opacity: 0;
   transition: transform 0.4s ease-out, opacity 0.4s ease-out;
 }
 
 .side-apparition-container:nth-child(odd) {
-  /* transform: translateX(-30px) skew(-20deg); */
+  transform: translateX(-30px) skew(-20deg);
 }
 .side-apparition-container.active {
   transform: translateX(0px) skew(0deg);

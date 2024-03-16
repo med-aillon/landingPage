@@ -12,9 +12,9 @@ const heroPushLink = document.querySelector(".hero-push-link");
 const txt = "Porsche, set free.";
 
 function typewriter(text, index) {
-    if(index > 3) subtitle.classList.add("active")
-    if(index > 3)     heroPushLink.classList.add("active")
-    
+  if (index > 3) subtitle.classList.add("active");
+  if (index > 3) heroPushLink.classList.add("active");
+
   if (index < txt.length) {
     setTimeout(() => {
       title.innerHTML += `<span>${text[index]}</span>`;
@@ -25,3 +25,53 @@ function typewriter(text, index) {
 setTimeout(() => {
   typewriter(txt, 0);
 }, 300);
+
+heroPushLink.addEventListener("click", slideDown);
+
+const hero = document.querySelector(".hero");
+
+function slideDown(e) {
+  e.preventDefault();
+  window.scrollTo({
+    top: document.querySelector(`${e.target.getAttribute("href")}`).offsetTop,
+    behavior: "smooth",
+  });
+}
+
+// ScrollAnimation
+const generalAnimatedElements = [
+  ...document.querySelectorAll("h2"),
+  ...document.querySelectorAll(".section-subtitle"),
+];
+
+const discoverSectionElements = [
+  document.querySelector(".text-discover-content h3"),
+  document.querySelector(".text-discover-content p"),
+  document.querySelector(".discover-link"),
+  document.querySelector(".discover-main-img"),
+];
+
+const slideInContent = [
+  ...document.querySelectorAll(".side-apparition-container"),
+];
+
+const animatedContents = [
+  ...generalAnimatedElements,
+  ...discoverSectionElements,
+  ...slideInContent,
+];
+
+const intersectionObserver = new IntersectionObserver(handleIntersect, {
+  rootMargin: "-10%",
+});
+
+animatedContents.forEach((el) => intersectionObserver.observe(el));
+
+function handleIntersect(entries) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+      intersectionObserver.unobserve(entry.target);
+    }
+  });
+}
